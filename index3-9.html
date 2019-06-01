@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue中的set方法</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<!--动态增加对象的项是不会直接显示的，需要在引用除新增，用以替换之前的对象
+			还可以通过Vue.set方法直接给对象新增项,例如：
+			Vue.set(vm.userInfo,"address","beijing")  --全局方法
+			vm.$set(vm.userInfo,"address","beijing")  --实例方法
+		-->
+		<div id="app">
+			<div v-for="(item, key, index) of userInfo">
+				{{item}}---{{key}}---{{index}}
+			</div>
+			
+			
+		</div>
+		
+		<script>
+			//push top shift unshift splice sort reverse
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					userInfo: {
+						name: "Yang",
+						age: 28,
+						gender: "male",
+						salary: "secret"
+					}
+					
+				}
+			})
+		</script>
+	</body>
+</html>
