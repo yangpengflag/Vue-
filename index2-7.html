@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>组件间传值</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<div>
+				<input type="text" v-model="todoValue"/>
+				<button @click="handleBtnClick">提交</button>
+			</div>			
+			<ul>
+				<!--创建子组件，并监听子组件的delete事件，一旦delete事件被触发，就调用父组件的handleItemDelete方法-->
+				<todo-item1 v-bind:content="item"
+					        v-bind:index="index"
+					        v-for="(item, index) in list"
+					        @delete="handleItemDelete"> <!--监听delete事件，触发父组件的handleItemDelete方法-->
+				</todo-item1>
+				
+			</ul>
+		</div>
+		
+		
+		<script>
+			var TodoItem = {
+				props: ["content","index"],
+				template: "<li @click='handleItemClick'>{{content}}</li>",
+				methods:{
+					handleItemClick:function(){
+						this.$emit("delete", this.index) //$emit向外触发事件，点击子组件handleItemClick，子组件会向外触发delete事件
+					}
+				}
+			}
+			
+			var app = new Vue({
+				el:'#root',
+				components:{
+					TodoItem1: TodoItem
+				},
+				data:{
+					todoValue:"",
+					list: []
+					
+				},
+				methods:{
+					handleBtnClick:function(){
+						this.list.push(this.todoValue)
+						this.todoValue= ""
+					},
+					handleItemDelete:function(index){
+						this.list.splice(index, 1)
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>

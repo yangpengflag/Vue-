@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue实例生命周期函数</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">Hello Vue</div>
+		
+		<script>
+			//生命周期函数就是vue实例在某个时间点会自动执行的函数
+			var vm = new Vue({
+				el: "#app",
+				//创建实例前，先执行beforeCreate
+				beforeCreate: function(){
+					console.log("beforeCreate");
+				},
+				//创建实例后，立即执行created
+				created: function(){
+					console.log("created");
+				},
+				//判断是否有el属性，有就继续判断是否存在template属性，如果没有template属性则将el作用域当做template模板
+				//挂载el前执行
+				beforeMount: function(){
+					console.log("beforeMount");
+				},
+				//挂载完el后执行
+				mounted: function(){
+					console.log("mounted");
+				},
+				//当data更新前执行
+				beforeUpdate: function(){
+					console.log("beforeUpdate");
+				},
+				//当data更新后执行
+				updated: function(){
+					console.log("updated");
+				},
+				//实例销毁前执行
+				beforeDestroy: function(){
+					console.log("beforeDestroy");
+				},
+				//实例销毁后执行
+				destroyed: function(){
+					console.log("destroyed");
+				}
+			})
+		</script>
+	</body>
+</html>
