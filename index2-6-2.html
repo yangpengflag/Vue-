@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>ToDoList自定义全局组件</title>
+		<title>ToDoList自定义局部组件</title>
 		<script src="./vue.js"></script>
 	</head>
 	<body>
@@ -15,20 +15,28 @@
 				<!--通过v-for决定要循环的todo-item的组件个数，同时通过循环将item的值用v-bind传给了
 				todo-item这个子组件，子组件想要使用父组件传递过来的值，一定要使用props对content进行接收
 				接收完之后就可以在模板中使用了-->
-				<todo-item v-bind:content="item"
+				<todo-item1 v-bind:content="item"
 					       v-for="item in list">
-				</todo-item>
+				</todo-item1>
 			</ul>
 		</div>
 		<script>
-			Vue.component("TodoItem",{ //定义一个全局组件todo-item
-				//子组件想要使用父组件传递过来的值，一定要使用props对content进行接收
-				//接收完之后就可以在模板中使用了
-				props:['content'],
-				template:"<li>{{content}}</li>",
-			})
+//			Vue.component("TodoItem",{ //定义一个全局组件todo-item
+//				//子组件想要使用父组件传递过来的值，一定要使用props对content进行接收
+//				//接收完之后就可以在模板中使用了
+//				props:['content'],
+//				template:"<li>{{content}}</li>",
+//			})
+           //定义一个局部组件
+			var TodoItem = {
+				props:['content'], //接收外部传递过来的数据
+				template:"<li>{{content}}</li>", //组件模板
+			}
 			var app = new Vue({
 				el:'#test',
+				components:{  //将局部组件在实例中注册，右边的原组件名可以注册为左边的组件名TodoItem1
+					TodoItem1:TodoItem
+				},
 				data:{
 					list:[],
 					inputValue:''

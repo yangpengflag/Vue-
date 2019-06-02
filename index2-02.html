@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>HELLO WORD</title>
+		<script src="vue.js"></script>		
+	</head>
+	<body>
+	<div id="test">{{content}}</div>
+		<script>
+			var app = new Vue({
+			//el:#test的意思是使用new的这个Vue实例app来接管id为test的dom标签里的所有内容
+				el:'#test',
+				data:{
+					content:"hello word peng"
+				}
+			})
+			
+			//设置两秒后失效，并执行下面的方法将content修改
+			setTimeout(function(){
+				app.$data.content="Word Peng"
+			},2000)
+		</script>
+		
+	</body>
+</html>
