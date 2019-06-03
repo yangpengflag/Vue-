@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件使用过程中的细节点</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<table>
+				<tbody>
+					<!--由于tbody下必须跟tr，所以直接使用组件代替tr会有问题，
+					此时可以用is来使tr指向row组件，类似别名
+					类似的情况还有ul、ol、select-->
+					<tr is="row"></tr>
+					<tr is="row"></tr>
+					<tr is="row"></tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<script>
+			Vue.component('row',{
+				//非根组件，定义data时，必须定义为一个function，不能定义为一个对象，否则会报错
+				data: function(){
+					return {
+						content: "this is content"
+					}					
+				},
+                //template: '<tr><td>This is a row</td></tr>'	
+                template: "<tr><td>{{content}}</td></tr>"
+
+			})
+			var vm = new Vue({
+				//根组件可以将data定义为一个对象
+				el: '#app'
+			})
+		</script>
+	</body>
+</html>
