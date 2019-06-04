@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>非父子组件传值(Bus/总线/发布订阅模式/观察者模式)</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<child content="Dell"></child>
+			<child content="Lee"></child>
+			
+		</div>
+		
+		
+		<script>
+			Vue.component("child", {
+				props: {
+					content: String,
+				},
+				template: "<div>{{content}}</div>"
+			})
+			var vm = new Vue({
+				el: "#app"
+			})
+		</script>
+	</body>
+</html>

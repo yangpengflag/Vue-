@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>给组件绑定原生事件</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!--想要直接触发父组件上的click事件，除了用this.$emit()外，还可以用native来标识，
+			native标识为原生事件，直接触发点击事件-->
+			<child @click.native="handleClick"></child>
+			
+		</div>
+		
+		
+		<script>
+			Vue.component("child", {
+				template: "<div>Child</div>"
+			})
+			var vm = new Vue({
+				el: "#app",
+				methods: {
+					handleClick: function(){
+						alert('handleClick')
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
