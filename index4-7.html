@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue中的作用域插槽(slot)</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<child>
+				
+				//父组件接收数据时用template固定写法接收
+				<template slot-scope="props">
+					<div>{{props.item1}}</div>
+				</template>
+			</child>
+
+		</div>
+		
+		
+		<script>
+			Vue.component("child", {
+				data: function(){
+					return {
+						list: [1, 2, 3, 4]
+					}
+				},
+				//子组件可以向父组件的插槽里传数据
+				//子组件做循环,或者某部分DOM结构应该由外部传递进来的时候,使用作用域插槽
+				template: `<div>
+				            <ul>
+							 <slot 
+							     v-for="item of list" 
+								 :item1 = item>							       
+							 </slot>
+							</ul>             
+				
+				           </div>`
+			})
+			var vm = new Vue({
+				el: "#app"
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue中插槽的使用(slot)</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<body-content>
+				//插槽相当于父组件向子组件传值，子组件不需要用props接收，直接用slot即可用
+				<div class="footer" slot="footer">footer</div>
+				<div class="header" slot="header">header</div>
+			</body-content>
+		</div>
+		
+		
+		<script>
+			Vue.component("body-content", {
+				//当使用的slot的name不存在时,显示默认值default header
+				template: "<div><slot name='header1'><h1>default header</h1></slot><div class='content'>content</div><slot name='footer'></slot></div>"
+			})
+			var vm = new Vue({
+				el: "#app"
+			})
+		</script>
+	</body>
+</html>

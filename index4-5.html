@@ -7,6 +7,7 @@
 	</head>
 	<body>
 		<div id="app">
+			//实现点击Dell将Lee也改为Dell，实现兄弟组件之间传值
 			<child content="Dell"></child>
 			<child content="Lee"></child>
 			
@@ -14,11 +15,34 @@
 		
 		
 		<script>
+			//这里bus是一个Vue实例,所以拥有$emit和$on方法
+			Vue.prototype.bus = new Vue()
+			
 			Vue.component("child", {
+				//非根组件,data只能定义为function
+				data: function () {
+					return {
+						//子组件不能修改父组件传递过来的值content,需要用另外一个值selfcontent去接收然后自己再修改
+						selfcontent: this.content
+					}
+				},
 				props: {
+					//接收父组件的传值content
 					content: String,
 				},
-				template: "<div>{{content}}</div>"
+				template: "<div @click='handleClick'>{{selfcontent}}</div>",
+				methods:{
+					handleClick: function(){
+						this.bus.$emit('change',this.selfcontent)
+					}
+				},
+				mounted: function(){
+					var this_ = this
+					//Vue生命周期钩子，当组件挂在时监听bus的改变事件change,在组件挂在完后执行下面的方法
+					this.bus.$on('change', function(msg){
+						this_.selfcontent = msg
+					})
+				}
 			})
 			var vm = new Vue({
 				el: "#app"
