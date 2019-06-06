@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div id="app">
-			//component会动态根据is绑定的type的值动态切换组件，与下面的通过v-if判断效果一致
+			<!-- component会动态根据is绑定的type的值动态切换组件，与下面的通过v-if判断效果一致 -->
 			<!-- <component :is="type"></component> -->
 			<child-one v-if="type === 'child-one'"></child-one>
 			<child-two v-if="type === 'child-two'"></child-two>
