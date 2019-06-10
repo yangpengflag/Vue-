@@ -36,7 +36,11 @@
 		<div id="app">
 			<!-- transition过渡动画效果 -->
 			<!-- 自定义样式名称，将fade-leave-active改为leave -->
-			<transition name="fade" leave-active-class="leave">
+			<transition 
+			   name="fade" 
+			   enter-active-class="animated swing"
+			   leave-active-class="animated shake"
+			   >
 				<div v-if="show">hello vue</div>
 			</transition>
 			<button @click="handleClick">切换</button>
