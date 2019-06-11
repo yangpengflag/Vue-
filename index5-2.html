@@ -5,41 +5,42 @@
 		<title>Vue中使用animate.css库</title>
 		<script src="vue.js"></script>
 		<link rel="stylesheet" type="text/css" href="animate.css" />
-		<!-- 引入animate.css后我们就不需要自己去写动画效果了，可以直接使用它里面的样式来实现 -->
+		<!-- 引入animate.css后我们就不需要自己去写动画效果了，可以直接使用它里面的样式来实现
+		 animate.css提供的动画，其实是@keyframes这种动画 c3动画 跟transition过渡动画效果有区别-->
 <!-- 		<style>
 			@keyframes bounce-in{
-				0% {
-					transform: scale(0);
+				0% { 
+					transform: scale(0);  //0%时刻，即初始化的时候为0，即不显示
 				}
 				50% {
-					transform: scale(1.5);
+					transform: scale(1.5); //执行到50%的时候原来的1.5倍大
 				}
 				100% {
-					transform: scale(1);
+					transform: scale(1); //执行完后恢复原来大小
 				}
 			}
 			
 			
-			.fade-enter-active {
+			.fade-enter-active {  //进来的时候
 				transform-origin: left center;
-				animation: bounce-in 1s;
+				animation: bounce-in 1s;  //在一秒内运行结束
 			}
 			//自定义样式名称
-			/* .fade-leave-active { */
+			/* .fade-leave-active { */  //离开的时候
 			.leave {
 				transform-origin: left center;
-				animation: bounce-in 1s reverse;
+				animation: bounce-in 1s reverse;  //离开的时候动画反向(reverse)执行
 			}
 		</style> -->
 	</head>
 	<body>
 		<div id="app">
-			<!-- transition过渡动画效果 -->
-			<!-- 自定义样式名称，将fade-leave-active改为leave -->
+			<!-- transition过渡动画效果 -->			
 			<transition 
 			   name="fade" 
 			   enter-active-class="animated swing"
 			   leave-active-class="animated shake"
+			   <!-- leave-active-class="leave" --><!-- 自定义样式名称，将fade-leave-active改为leave -->s
 			   >
 				<div v-if="show">hello vue</div>
 			</transition>
